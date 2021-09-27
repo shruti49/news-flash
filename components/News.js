@@ -77,7 +77,7 @@ const News = () => {
 				loader={<Spinner />}
 				style={{ overflow: "hidden" }}
 			>
-				<div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
+				<div className="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
 					{articles.map((article) => (
 						<NewsItem
 							title={article.title}
