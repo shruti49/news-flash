@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
 	return (
 		<div className="max-w-sm rounded overflow-hidden shadow-lg">
-			<img className="w-full" src={imageUrl ? imageUrl : ""} alt="Sunset in the mountains" />
+			<Image src={imageUrl ? imageUrl : ""} alt="News Picture" />
 			<div className="px-6 py-4">
 				<div className="font-bold text-xl mb-2">{title ? title.slice(0, 40) + "..." : ""}</div>
 				<p className="text-gray-700 text-base">
