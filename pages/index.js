@@ -16,7 +16,7 @@ const Home = ({ data }) => {
 	return (
 		<>
 			<div className="lg:container lg:mx-auto">
-				<h2 className="text-center text-xl font-medium mt-3">Top Headings </h2>
+				<h2 className="text-center text-xl font-medium pt-20">Top Headings </h2>
 				<div className="grid grid-cols-3 gap-6 my-6">
 					{data.articles.map((article) => (
 						<NewsItem
