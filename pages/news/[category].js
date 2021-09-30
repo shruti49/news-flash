@@ -1,16 +1,21 @@
 import NewsItem from "../../components/NewsItem";
+import { useState } from "react";
 
 export async function getServerSideProps(context) {
-	const { params } = context;
-	const { category } = params;
-	let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=29bcb89ef0cf4767a929c6b98dd1f7d6`;
-	const res = await fetch(url);
-	const data = await res.json();
-	if (!data) {
-		return {
-			notFound: true,
-		};
+	try {
+		const { params } = context;
+		const { category } = params;
+		let noOfArticles = 14;
+		let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.APIKEY}&pageSize=${noOfArticles}`;
+		const res = await fetch(url);
+		if (res.status !== 200) {
+			throw new Error("Failed to fetch");
+		}
+		const data = await res.json();
+	} catch (err) {
+		data = { error: { message: err.message } };
 	}
+
 	return {
 		props: {
 			data,
@@ -21,19 +26,21 @@ export async function getServerSideProps(context) {
 
 const Category = ({ data, category }) => {
 	const captialiseWord = (text) => {
-				let text1 = text.toLowerCase();
-				var arr = [];
-				arr.push(text1[0].toUpperCase());
-				for (var j = 1; j < text1.length; j++) {
-					if (text1[j - 1] === " " || text1[j - 1] === "\n") {
-						arr.push(text1[j].toUpperCase());
-					} else {
-						arr.push(text1[j]);
-					}
+		if (text !== "" || text !== null) {
+			let text1 = text.toLowerCase();
+			var arr = [];
+			arr.push(text1[0].toUpperCase());
+			for (var j = 1; j < text1.length; j++) {
+				if (text1[j - 1] === " " || text1[j - 1] === "\n") {
+					arr.push(text1[j].toUpperCase());
+				} else {
+					arr.push(text1[j]);
 				}
-
-				return arr.toString().replaceAll(",", "");
-	}
+			}
+			text = arr.toString();
+			return text.replaceAll(",", "");
+		}
+	};
 	return (
 		<div className="lg:container lg:mx-auto">
 			<h2 className="text-center text-xl font-medium pt-20">

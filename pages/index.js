@@ -1,7 +1,5 @@
 import NewsItem from "../components/NewsItem";
-import InfiniteScroll from "react-infinite-scroll-component";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
 
 export const getStaticProps = async () => {
 	let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=29bcb89ef0cf4767a929c6b98dd1f7d6`;
